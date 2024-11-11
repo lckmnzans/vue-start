@@ -9,7 +9,7 @@
         </ul>
         <form class="d-flex">
             <button class="btn btn-primary"
-            @click.prevent="changeTheme()"
+            @click.prevent="changeTheme();storeThemeSetting()"
             >Toggle NavBar</button>
         </form>
     </div>
@@ -22,6 +22,9 @@ export default {
     props:['pages','activePage','navLinkClick'],
     components:{
         NavbarLink
+    },
+    created() {
+        this.getThemeSetting();
     },
     data() {
         return {
@@ -36,6 +39,16 @@ export default {
                 theme = 'dark';
             }
             this.theme = theme;
+        },
+        storeThemeSetting() {
+            localStorage.setItem('theme', this.theme);
+        },
+        getThemeSetting() {
+            let theme = localStorage.getItem('theme');
+
+            if (theme) {
+                this.theme = theme;
+            }
         }
     }
 }
