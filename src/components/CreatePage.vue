@@ -19,7 +19,7 @@
             </div>
             <div class="row mb-3">
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input">
+                    <input type="checkbox" class="form-check-input" v-model="published">
                     <label for="gridCheck1" class="form-check-label">Published</label>
                 </div>
             </div>
@@ -44,7 +44,8 @@ export default {
             pageTitle: '',
             content: '',
             linktext: '',
-            linkurl: ''
+            linkurl: '',
+            published: true
         }
     },
     methods: {
@@ -58,10 +59,24 @@ export default {
                 pageTitle: this.pageTitle,
                 content: this.content,
                 link: {
-                    linktext: this.linktext,
-                    linkurl: this.linkurl
-                }
+                    text: this.linktext,
+                    url: this.linkurl
+                },
+                published: this.published
             })
+
+            this.pageTitle = '';
+            this.content = '';
+            this.linktext = '';
+            this.linkurl = '';
+            this.published = true;
+        }
+    },
+    watch: {
+        pageTitle(newTitle, oldTitle) {
+            if (this.linktext === oldTitle) {
+                this.linktext = newTitle;
+            }
         }
     }
 }
