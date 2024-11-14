@@ -55,7 +55,7 @@ export default {
                 return;
             }
 
-            this.pageCreated({
+            this.$emit('pageCreated', {
                 pageTitle: this.pageTitle,
                 content: this.content,
                 link: {
@@ -63,7 +63,7 @@ export default {
                     url: this.linkurl
                 },
                 published: this.published
-            })
+            });
 
             this.pageTitle = '';
             this.content = '';
